@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/model/responses/product_response_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

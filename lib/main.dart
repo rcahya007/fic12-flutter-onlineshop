@@ -7,6 +7,7 @@ import 'package:flutter_fic12_onlineshop/data/datasources/product_remote_datasou
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/best_seller_product/best_seller_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/category/category_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/special_offer_product/special_offer_product_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -30,6 +31,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => BestSellerProductBloc(ProductRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              SpecialOfferProductBloc(ProductRemoteDatasource()),
         ),
       ],
       child: MaterialApp.router(

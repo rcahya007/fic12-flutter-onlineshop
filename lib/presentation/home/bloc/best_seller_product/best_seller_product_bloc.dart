@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:flutter_fic12_onlineshop/data/datasources/product_remote_datasource.dart';
@@ -16,7 +16,7 @@ class BestSellerProductBloc
     this._productRemoteDatasource,
   ) : super(const _Initial()) {
     on<_GetBestSellerProducts>((event, emit) async {
-      final response = await _productRemoteDatasource.getProductByCategory(4);
+      final response = await _productRemoteDatasource.getProductByCategory(1);
       response.fold(
         (l) => emit(BestSellerProductState.error(l)),
         (r) => emit(BestSellerProductState.loaded(r.data!.data!)),

@@ -5,6 +5,7 @@ import 'package:flutter_fic12_onlineshop/core/components/components.dart';
 import 'package:flutter_fic12_onlineshop/core/router/app_router.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/best_seller_product/best_seller_product_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/special_offer_product/special_offer_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/widgets/banner_slider.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/widgets/organism/menu_categories.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/widgets/organism/product_list.dart';
@@ -37,6 +38,9 @@ class _HomePageState extends State<HomePage> {
     context
         .read<BestSellerProductBloc>()
         .add(const BestSellerProductEvent.getBestSellerProducts());
+    context
+        .read<SpecialOfferProductBloc>()
+        .add(const SpecialOfferProductEvent.getSpecialOfferProducts());
     super.initState();
   }
 
@@ -130,24 +134,37 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
-          const SpaceHeight(50.0),
+          // const SpaceHeight(50.0),
           // ProductList(
           //   title: 'New Arrivals',
           //   onSeeAllTap: () {},
           //   items: newArrivals,
           // ),
-          const SpaceHeight(50.0),
+          // const SpaceHeight(50.0),
           // ProductList(
           //   title: 'Top Rated Product',
           //   onSeeAllTap: () {},
           //   items: topRatedProducts,
           // ),
           const SpaceHeight(50.0),
-          // ProductList(
-          //   title: 'Special Offers',
-          //   onSeeAllTap: () {},
-          //   items: specialOffers,
-          // ),
+          BlocBuilder<SpecialOfferProductBloc, SpecialOfferProductState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                loaded: (products) => ProductList(
+                  title: 'Special Offers',
+                  onSeeAllTap: () {},
+                  items: products.sublist(0, 2),
+                ),
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                error: (message) => Center(
+                  child: Text(message),
+                ),
+                orElse: () => const SizedBox(),
+              );
+            },
+          ),
         ],
       ),
     );
