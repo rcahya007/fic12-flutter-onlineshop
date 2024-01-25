@@ -34,13 +34,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     searchController = TextEditingController();
-    context.read<AllProductBloc>().add(const AllProductEvent.getAllProducts());
-    context
-        .read<BestSellerProductBloc>()
-        .add(const BestSellerProductEvent.getBestSellerProducts());
-    context
-        .read<SpecialOfferProductBloc>()
-        .add(const SpecialOfferProductEvent.getSpecialOfferProducts());
+    // context.read<AllProductBloc>().add(const AllProductEvent.getAllProducts());
+    // context
+    //     .read<BestSellerProductBloc>()
+    //     .add(const BestSellerProductEvent.getBestSellerProducts());
+    // context
+    //     .read<SpecialOfferProductBloc>()
+    //     .add(const SpecialOfferProductEvent.getSpecialOfferProducts());
     super.initState();
   }
 
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cwb Store'),
+        title: const Text('OP-Warnet Store'),
         actions: [
           IconButton(
             onPressed: () {},
@@ -89,51 +89,52 @@ class _HomePageState extends State<HomePage> {
           BannerSlider(items: banners1),
           const SpaceHeight(12.0),
           TitleContent(
-            title: 'Categories',
+            title: 'Rooms',
             onSeeAllTap: () {},
           ),
-          const SpaceHeight(12.0),
-          const MenuCategories(),
-          const SpaceHeight(50.0),
-          BlocBuilder<AllProductBloc, AllProductState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                loaded: (products) => ProductList(
-                  title: 'Featured Product',
-                  onSeeAllTap: () {},
-                  items: products.sublist(0, 2),
-                ),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                error: (message) => Center(
-                  child: Text(message),
-                ),
-                orElse: () => const SizedBox(),
-              );
-            },
+          SizedBox(
+            height: 16,
           ),
+          
+          // BlocBuilder<AllProductBloc, AllProductState>(
+          //   builder: (context, state) {
+          //     return state.maybeWhen(
+          //       loaded: (products) => ProductList(
+          //         title: 'Featured Product',
+          //         onSeeAllTap: () {},
+          //         items: products.sublist(0, 2),
+          //       ),
+          //       loading: () => const Center(
+          //         child: CircularProgressIndicator(),
+          //       ),
+          //       error: (message) => Center(
+          //         child: Text(message),
+          //       ),
+          //       orElse: () => const SizedBox(),
+          //     );
+          //   },
+          // ),
           const SpaceHeight(50.0),
           BannerSlider(items: banners2),
           const SpaceHeight(28.0),
-          BlocBuilder<BestSellerProductBloc, BestSellerProductState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                loaded: (products) => ProductList(
-                  title: 'Best Sellers',
-                  onSeeAllTap: () {},
-                  items: products.sublist(0, 2),
-                ),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                error: (message) => Center(
-                  child: Text(message),
-                ),
-                orElse: () => const SizedBox(),
-              );
-            },
-          ),
+          // BlocBuilder<BestSellerProductBloc, BestSellerProductState>(
+          //   builder: (context, state) {
+          //     return state.maybeWhen(
+          //       loaded: (products) => ProductList(
+          //         title: 'Best Sellers',
+          //         onSeeAllTap: () {},
+          //         items: products.sublist(0, 2),
+          //       ),
+          //       loading: () => const Center(
+          //         child: CircularProgressIndicator(),
+          //       ),
+          //       error: (message) => Center(
+          //         child: Text(message),
+          //       ),
+          //       orElse: () => const SizedBox(),
+          //     );
+          //   },
+          // ),
           // const SpaceHeight(50.0),
           // ProductList(
           //   title: 'New Arrivals',
@@ -147,24 +148,24 @@ class _HomePageState extends State<HomePage> {
           //   items: topRatedProducts,
           // ),
           const SpaceHeight(50.0),
-          BlocBuilder<SpecialOfferProductBloc, SpecialOfferProductState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                loaded: (products) => ProductList(
-                  title: 'Special Offers',
-                  onSeeAllTap: () {},
-                  items: products.sublist(0, 2),
-                ),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                error: (message) => Center(
-                  child: Text(message),
-                ),
-                orElse: () => const SizedBox(),
-              );
-            },
-          ),
+          // BlocBuilder<SpecialOfferProductBloc, SpecialOfferProductState>(
+          //   builder: (context, state) {
+          //     return state.maybeWhen(
+          //       loaded: (products) => ProductList(
+          //         title: 'Special Offers',
+          //         onSeeAllTap: () {},
+          //         items: products.sublist(0, 2),
+          //       ),
+          //       loading: () => const Center(
+          //         child: CircularProgressIndicator(),
+          //       ),
+          //       error: (message) => Center(
+          //         child: Text(message),
+          //       ),
+          //       orElse: () => const SizedBox(),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
