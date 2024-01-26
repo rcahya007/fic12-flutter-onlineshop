@@ -53,7 +53,7 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
-flutter_gen_runner:
+flutter_gen:
   output: lib/core/assets/
   integrations:
     flutter_svg: true
@@ -68,9 +68,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/images/banks/
-    - assets/images/categories/
-    - assets/images/products/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
