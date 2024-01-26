@@ -29,7 +29,7 @@ part 'models/path_parameters.dart';
 
 class AppRouter {
   final router = GoRouter(
-    initialLocation: RouteConstants.splashPath,
+    initialLocation: RouteConstants.rootPath,
     routes: [
       GoRoute(
         name: RouteConstants.splash,

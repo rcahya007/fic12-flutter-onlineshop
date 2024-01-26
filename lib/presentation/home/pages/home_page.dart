@@ -11,6 +11,7 @@ import 'package:flutter_fic12_onlineshop/presentation/home/widgets/organism/menu
 import 'package:flutter_fic12_onlineshop/presentation/home/widgets/organism/product_list.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/widgets/title_content.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -92,10 +93,174 @@ class _HomePageState extends State<HomePage> {
             title: 'Rooms',
             onSeeAllTap: () {},
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                color: Colors.amber,
+                width: 80,
+                height: 76,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: const Color(0xff51B1A6),
+                          width: 1,
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color(0xffC1C9D1),
+                              blurRadius: 10,
+                              offset: Offset(0, 2))
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.app_registration_outlined,
+                        size: 40,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Bestseller',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 14,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.amber,
+                width: 80,
+                height: 76,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: const Color(0xff51B1A6),
+                          width: 1,
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color(0xffC1C9D1),
+                              blurRadius: 10,
+                              offset: Offset(0, 2))
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.app_registration_outlined,
+                        size: 40,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Bestseller',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 14,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.amber,
+                width: 80,
+                height: 76,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: const Color(0xff51B1A6),
+                          width: 1,
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color(0xffC1C9D1),
+                              blurRadius: 10,
+                              offset: Offset(0, 2))
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.app_registration_outlined,
+                        size: 40,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Bestseller',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 14,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.amber,
+                width: 80,
+                height: 76,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: const Color(0xff51B1A6),
+                          width: 1,
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color(0xffC1C9D1),
+                              blurRadius: 10,
+                              offset: Offset(0, 2))
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.widgets_outlined,
+                        size: 40,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Bestseller',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 14,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
           // BlocBuilder<AllProductBloc, AllProductState>(
           //   builder: (context, state) {
           //     return state.maybeWhen(
