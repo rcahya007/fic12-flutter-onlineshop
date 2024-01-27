@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/pages/cart_page.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/pages/catalog_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/pages/categories_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/pages/home_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/liked/pages/liked_page.dart';
@@ -41,23 +42,39 @@ class AppNavigation {
             navigatorKey: _rootNavigatorHome,
             routes: [
               GoRoute(
-                  path: '/home',
-                  name: 'Home',
-                  builder: (context, state) => HomePage(
+                path: '/home',
+                name: 'Home',
+                builder: (context, state) => HomePage(
+                  key: state.pageKey,
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'categories',
+                    name: 'categories',
+                    builder: (context, state) {
+                      return CategoriesPage(
                         key: state.pageKey,
-                      ),
-                  routes: [
-                    GoRoute(
-                        path: 'categories',
-                        name: 'categories',
-                        builder: (context, state) {
-                          return CategoriesPage(
-                            key: state.pageKey,
-                            idRoom: state.uri.queryParameters['idRoom']!,
-                            nameRoom: state.uri.queryParameters['nameRoom']!,
-                          );
-                        })
-                  ]),
+                        idRoom: state.uri.queryParameters['idRoom']!,
+                        nameRoom: state.uri.queryParameters['nameRoom']!,
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                          path: 'catalog',
+                          name: 'catalog',
+                          builder: (context, state) {
+                            return CatalogPage(
+                              key: state.pageKey,
+                              idCategory:
+                                  state.uri.queryParameters['idCategory']!,
+                              nameCategoty:
+                                  state.uri.queryParameters['nameCategoty']!,
+                            );
+                          }),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
 

@@ -32,6 +32,7 @@ class CategoryResponseModel {
 
 class Category {
   final int? id;
+  final int? roomId;
   final String? name;
   final String? description;
   final String? image;
@@ -40,6 +41,7 @@ class Category {
 
   Category({
     this.id,
+    this.roomId,
     this.name,
     this.description,
     this.image,
@@ -53,6 +55,7 @@ class Category {
 
   factory Category.fromMap(Map<String, dynamic> json) => Category(
         id: json["id"],
+        roomId: json["room_id"],
         name: json["name"],
         description: json["description"],
         image: json["image"],
@@ -66,6 +69,7 @@ class Category {
 
   Map<String, dynamic> toMap() => {
         "id": id,
+        "room_id": roomId,
         "name": name,
         "description": description,
         "image": image,

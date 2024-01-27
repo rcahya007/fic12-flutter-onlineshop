@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/core/components/grid_view_product.dart';
-import 'package:flutter_fic12_onlineshop/core/components/rooms.dart';
 import 'package:flutter_fic12_onlineshop/core/components/search.dart';
-import 'package:flutter_fic12_onlineshop/core/components/stories.dart';
 import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_room/all_room_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/widgets/rooms.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/widgets/stories.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

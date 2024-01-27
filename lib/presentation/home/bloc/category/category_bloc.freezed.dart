@@ -19,19 +19,19 @@ mixin _$CategoryEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getCategories,
+    required TResult Function(int roomId) getCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getCategories,
+    TResult? Function(int roomId)? getCategories,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getCategories,
+    TResult Function(int roomId)? getCategories,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +113,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getCategories,
+    required TResult Function(int roomId) getCategories,
   }) {
     return started();
   }
@@ -122,7 +122,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getCategories,
+    TResult? Function(int roomId)? getCategories,
   }) {
     return started?.call();
   }
@@ -131,7 +131,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getCategories,
+    TResult Function(int roomId)? getCategories,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -181,6 +181,8 @@ abstract class _$$GetCategoriesImplCopyWith<$Res> {
   factory _$$GetCategoriesImplCopyWith(
           _$GetCategoriesImpl value, $Res Function(_$GetCategoriesImpl) then) =
       __$$GetCategoriesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int roomId});
 }
 
 /// @nodoc
@@ -190,54 +192,78 @@ class __$$GetCategoriesImplCopyWithImpl<$Res>
   __$$GetCategoriesImplCopyWithImpl(
       _$GetCategoriesImpl _value, $Res Function(_$GetCategoriesImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? roomId = null,
+  }) {
+    return _then(_$GetCategoriesImpl(
+      null == roomId
+          ? _value.roomId
+          : roomId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetCategoriesImpl implements _GetCategories {
-  const _$GetCategoriesImpl();
+  const _$GetCategoriesImpl(this.roomId);
+
+  @override
+  final int roomId;
 
   @override
   String toString() {
-    return 'CategoryEvent.getCategories()';
+    return 'CategoryEvent.getCategories(roomId: $roomId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetCategoriesImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetCategoriesImpl &&
+            (identical(other.roomId, roomId) || other.roomId == roomId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, roomId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetCategoriesImplCopyWith<_$GetCategoriesImpl> get copyWith =>
+      __$$GetCategoriesImplCopyWithImpl<_$GetCategoriesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() getCategories,
+    required TResult Function(int roomId) getCategories,
   }) {
-    return getCategories();
+    return getCategories(roomId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? getCategories,
+    TResult? Function(int roomId)? getCategories,
   }) {
-    return getCategories?.call();
+    return getCategories?.call(roomId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? getCategories,
+    TResult Function(int roomId)? getCategories,
     required TResult orElse(),
   }) {
     if (getCategories != null) {
-      return getCategories();
+      return getCategories(roomId);
     }
     return orElse();
   }
@@ -275,7 +301,12 @@ class _$GetCategoriesImpl implements _GetCategories {
 }
 
 abstract class _GetCategories implements CategoryEvent {
-  const factory _GetCategories() = _$GetCategoriesImpl;
+  const factory _GetCategories(final int roomId) = _$GetCategoriesImpl;
+
+  int get roomId;
+  @JsonKey(ignore: true)
+  _$$GetCategoriesImplCopyWith<_$GetCategoriesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

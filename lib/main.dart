@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_fic12_onlineshop/data/datasources/room_remote_datasource.dart';
+import 'package:flutter_fic12_onlineshop/data/datasources/home_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/navigation/app_navigation.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_room/all_room_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/category/category_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +17,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AllRoomBloc(RoomRemoteDatasource()),
+          create: (context) => AllRoomBloc(HomeRemoteDatasource()),
         ),
+        BlocProvider(
+          create: (context) => CategoryBloc(HomeRemoteDatasource()),
+        )
       ],
       child: MaterialApp.router(
         routerConfig: AppNavigation.router,

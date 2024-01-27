@@ -1,12 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_fic12_onlineshop/core/components/search.dart';
-import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/widgets/categories.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
+import 'package:flutter_fic12_onlineshop/core/components/search.dart';
+import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/category/category_bloc.dart';
 
 class CategoriesPage extends StatefulWidget {
   final String idRoom;
@@ -28,6 +31,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
   void initState() {
     super.initState();
     _searchCategoriesController = TextEditingController();
+    context
+        .read<CategoryBloc>()
+        .add(CategoryEvent.getCategories(int.parse(widget.idRoom)));
   }
 
   @override
@@ -74,37 +80,24 @@ class _CategoriesPageState extends State<CategoriesPage> {
             ),
             Search(seacrhController: _searchCategoriesController),
             const TitleSection(name: 'categories'),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
-                    ),
-                    child: Row(
-                      children: [
-                        ClipOval(
-                          child: Image.network(
-                            'https://via.placeholder.com/150',
-                            width: 36,
-                            height: 36,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Text(
-                          'Category ${index + 1}',
-                          style: body1reg,
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+            BlocBuilder<CategoryBloc, CategoryState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  loaded: (categories) => Categories(
+                    categories: categories,
+                    idRoom: widget.idRoom,
+                    nameRoom: widget.nameRoom,
+                  ),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  error: (message) => Center(
+                    child: Text(message),
+                  ),
+                  orElse: () => const SizedBox(),
+                );
+              },
+            ),
           ],
         ),
       ),
