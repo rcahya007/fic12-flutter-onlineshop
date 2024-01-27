@@ -7,7 +7,6 @@ class RoomRemoteDatasource {
   Future<Either<String, RoomResponseModel>> getRooms() async {
     final response =
         await http.get(Uri.parse('${Variables.baseUrl}/api/rooms'));
-
     if (response.statusCode == 200) {
       return Right(RoomResponseModel.fromJson(response.body));
     } else {

@@ -93,7 +93,7 @@ TextStyle heading2lig = GoogleFonts.poppins(
 // Body 0
 TextStyle body0semi = GoogleFonts.poppins(
   fontSize: 18,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w500,
   color: colorBlack,
 );
 TextStyle body0reg = GoogleFonts.poppins(
@@ -110,7 +110,7 @@ TextStyle body0lig = GoogleFonts.poppins(
 // Body 1
 TextStyle body1semi = GoogleFonts.poppins(
   fontSize: 16,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w500,
   color: colorBlack,
 );
 TextStyle body1reg = GoogleFonts.poppins(
@@ -127,7 +127,7 @@ TextStyle body1lig = GoogleFonts.poppins(
 // Body 2
 TextStyle body2semi = GoogleFonts.poppins(
   fontSize: 14,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w500,
   color: colorBlack,
 );
 TextStyle body2reg = GoogleFonts.poppins(
@@ -144,7 +144,7 @@ TextStyle body2lig = GoogleFonts.poppins(
 // Body 3
 TextStyle body3semi = GoogleFonts.poppins(
   fontSize: 12,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w500,
   color: colorBlack,
 );
 TextStyle body3reg = GoogleFonts.poppins(
