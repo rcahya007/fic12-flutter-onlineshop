@@ -43,32 +43,32 @@ class AppNavigation {
             routes: [
               GoRoute(
                 path: '/home',
-                name: 'Home',
+                name: 'home',
                 builder: (context, state) => HomePage(
                   key: state.pageKey,
                 ),
                 routes: [
                   GoRoute(
-                    path: 'categories',
+                    path: ':nameRoom',
                     name: 'categories',
                     builder: (context, state) {
                       return CategoriesPage(
                         key: state.pageKey,
                         idRoom: state.uri.queryParameters['idRoom']!,
-                        nameRoom: state.uri.queryParameters['nameRoom']!,
+                        nameRoom: state.pathParameters['nameRoom']!,
                       );
                     },
                     routes: [
                       GoRoute(
-                          path: 'catalog',
+                          path: ':nameCategory',
                           name: 'catalog',
                           builder: (context, state) {
                             return CatalogPage(
                               key: state.pageKey,
                               idCategory:
                                   state.uri.queryParameters['idCategory']!,
-                              nameCategoty:
-                                  state.uri.queryParameters['nameCategoty']!,
+                              nameCategory:
+                                  state.pathParameters['nameCategory']!,
                             );
                           }),
                     ],

@@ -4,6 +4,7 @@ import 'package:flutter_fic12_onlineshop/core/components/grid_view_product.dart'
 import 'package:flutter_fic12_onlineshop/core/components/search.dart';
 import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_room/all_room_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/widgets/rooms.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/widgets/stories.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     _seacrhHomeController = TextEditingController();
     context.read<AllRoomBloc>().add(const AllRoomEvent.getAllRoom());
+    context.read<AllProductBloc>().add(const AllProductEvent.getAllProducts());
     super.initState();
   }
 
@@ -74,7 +76,20 @@ class _HomePageState extends State<HomePage> {
             const TitleSection(
               name: 'popular',
             ),
-            const GridViewProduct(),
+            BlocBuilder<AllProductBloc, AllProductState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  loaded: (products) => GridViewProduct(products: products),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  error: (message) => Center(
+                    child: Text(message),
+                  ),
+                  orElse: () => const SizedBox(),
+                );
+              },
+            ),
           ],
         ),
       ),

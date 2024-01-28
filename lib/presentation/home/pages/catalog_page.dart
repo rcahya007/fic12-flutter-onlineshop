@@ -1,5 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic12_onlineshop/core/components/grid_view_product.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,11 +11,11 @@ import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 
 class CatalogPage extends StatefulWidget {
   final String idCategory;
-  final String nameCategoty;
+  final String nameCategory;
   const CatalogPage({
     Key? key,
     required this.idCategory,
-    required this.nameCategoty,
+    required this.nameCategory,
   }) : super(key: key);
 
   @override
@@ -63,7 +65,7 @@ class _CatalogPageState extends State<CatalogPage> {
                   ),
                   Expanded(
                     child: Text(
-                      widget.nameCategoty,
+                      widget.nameCategory,
                       style: body1semi,
                       textAlign: TextAlign.center,
                     ),
@@ -72,6 +74,85 @@ class _CatalogPageState extends State<CatalogPage> {
               ),
             ),
             Search(seacrhController: _searchProductController),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: colorGiratina100,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Sort',
+                            style: body2semi,
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          SvgPicture.asset(
+                            Assets.icons.directionVertical.path,
+                            height: 18,
+                            width: 18,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: colorGiratina100,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Filter',
+                            style: body2semi,
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          SvgPicture.asset(
+                            Assets.icons.filter.path,
+                            height: 18,
+                            width: 18,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            BlocBuilder<AllProductBloc, AllProductState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  loaded: (products) => GridViewProduct(products: products),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  error: (message) => Center(
+                    child: Text(message),
+                  ),
+                  orElse: () => const SizedBox(),
+                );
+              },
+            ),
           ],
         ),
       ),

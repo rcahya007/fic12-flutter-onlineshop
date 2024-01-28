@@ -12,9 +12,18 @@ class AllProductBloc extends Bloc<AllProductEvent, AllProductState> {
   AllProductBloc(
     this._productRemoteDatasource,
   ) : super(const _Initial()) {
-    on<_GetAllPRoducts>((event, emit) async {
+    on<_GetAllProducts>((event, emit) async {
       emit(const AllProductState.loading());
       final response = await _productRemoteDatasource.getAllProducts();
+      response.fold(
+        (l) => emit(AllProductState.error(l)),
+        (r) => emit(AllProductState.loaded(r.data!.data!)),
+      );
+    });
+
+    on<_GetAllProductsByCategory>((event, emit) async {
+      emit(const AllProductState.loading());
+      final response = await _productRemoteDatasource.getProductByCategory(event.idCategory);
       response.fold(
         (l) => emit(AllProductState.error(l)),
         (r) => emit(AllProductState.loaded(r.data!.data!)),

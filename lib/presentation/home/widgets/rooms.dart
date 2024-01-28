@@ -27,13 +27,11 @@ class Rooms extends StatelessWidget {
         itemCount: rooms.length,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
-            context.goNamed(
-              'categories',
-              queryParameters: {
-                'idRoom': rooms[index].id.toString(),
-                'nameRoom': rooms[index].name,
-              },
-            );
+            context.goNamed('categories', queryParameters: {
+              'idRoom': rooms[index].id.toString(),
+            }, pathParameters: {
+              'nameRoom': rooms[index].name!,
+            });
           },
           child: Container(
             margin: const EdgeInsets.only(

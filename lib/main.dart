@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/home_remote_datasource.dart';
+import 'package:flutter_fic12_onlineshop/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/navigation/app_navigation.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_room/all_room_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/category/category_bloc.dart';
 
@@ -21,7 +23,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CategoryBloc(HomeRemoteDatasource()),
-        )
+        ),
+        BlocProvider(
+          create: (context) => AllProductBloc(ProductRemoteDatasource()),
+        ),
       ],
       child: MaterialApp.router(
         routerConfig: AppNavigation.router,

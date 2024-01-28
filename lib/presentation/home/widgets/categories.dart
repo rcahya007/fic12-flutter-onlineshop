@@ -26,26 +26,13 @@ class Categories extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            // print(
-            //   context.namedLocation(
-            //     'catalog',
-            //     queryParameters: {
-            //       'idRoom': idRoom,
-            //       'nameRoom': nameRoom,
-            //       'idCategory': categories[index].id.toString(),
-            //       'nameCategoty': categories[index].name,
-            //     },
-            //   ),
-            // );
-            context.goNamed(
-              'catalog',
-              queryParameters: {
-                'idRoom': idRoom,
-                'nameRoom': nameRoom,
-                'idCategory': categories[index].id.toString(),
-                'nameCategoty': categories[index].name,
-              },
-            );
+            context.goNamed('catalog', queryParameters: {
+              'idRoom': idRoom,
+              'idCategory': categories[index].id.toString(),
+            }, pathParameters: {
+              'nameRoom': nameRoom,
+              'nameCategory': categories[index].name!,
+            });
           },
           child: Container(
             color: colorWhite,

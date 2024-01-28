@@ -20,37 +20,45 @@ mixin _$AllProductEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllProducts,
+    required TResult Function(int idCategory) getAllProductsByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllProducts,
+    TResult? Function(int idCategory)? getAllProductsByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllProducts,
+    TResult Function(int idCategory)? getAllProductsByCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetAllPRoducts value) getAllProducts,
+    required TResult Function(_GetAllProducts value) getAllProducts,
+    required TResult Function(_GetAllProductsByCategory value)
+        getAllProductsByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllPRoducts value)? getAllProducts,
+    TResult? Function(_GetAllProducts value)? getAllProducts,
+    TResult? Function(_GetAllProductsByCategory value)?
+        getAllProductsByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetAllPRoducts value)? getAllProducts,
+    TResult Function(_GetAllProducts value)? getAllProducts,
+    TResult Function(_GetAllProductsByCategory value)? getAllProductsByCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +122,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllProducts,
+    required TResult Function(int idCategory) getAllProductsByCategory,
   }) {
     return started();
   }
@@ -123,6 +132,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllProducts,
+    TResult? Function(int idCategory)? getAllProductsByCategory,
   }) {
     return started?.call();
   }
@@ -132,6 +142,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllProducts,
+    TResult Function(int idCategory)? getAllProductsByCategory,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -144,7 +155,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetAllPRoducts value) getAllProducts,
+    required TResult Function(_GetAllProducts value) getAllProducts,
+    required TResult Function(_GetAllProductsByCategory value)
+        getAllProductsByCategory,
   }) {
     return started(this);
   }
@@ -153,7 +166,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllPRoducts value)? getAllProducts,
+    TResult? Function(_GetAllProducts value)? getAllProducts,
+    TResult? Function(_GetAllProductsByCategory value)?
+        getAllProductsByCategory,
   }) {
     return started?.call(this);
   }
@@ -162,7 +177,8 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetAllPRoducts value)? getAllProducts,
+    TResult Function(_GetAllProducts value)? getAllProducts,
+    TResult Function(_GetAllProductsByCategory value)? getAllProductsByCategory,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -177,25 +193,25 @@ abstract class _Started implements AllProductEvent {
 }
 
 /// @nodoc
-abstract class _$$GetAllPRoductsImplCopyWith<$Res> {
-  factory _$$GetAllPRoductsImplCopyWith(_$GetAllPRoductsImpl value,
-          $Res Function(_$GetAllPRoductsImpl) then) =
-      __$$GetAllPRoductsImplCopyWithImpl<$Res>;
+abstract class _$$GetAllProductsImplCopyWith<$Res> {
+  factory _$$GetAllProductsImplCopyWith(_$GetAllProductsImpl value,
+          $Res Function(_$GetAllProductsImpl) then) =
+      __$$GetAllProductsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetAllPRoductsImplCopyWithImpl<$Res>
-    extends _$AllProductEventCopyWithImpl<$Res, _$GetAllPRoductsImpl>
-    implements _$$GetAllPRoductsImplCopyWith<$Res> {
-  __$$GetAllPRoductsImplCopyWithImpl(
-      _$GetAllPRoductsImpl _value, $Res Function(_$GetAllPRoductsImpl) _then)
+class __$$GetAllProductsImplCopyWithImpl<$Res>
+    extends _$AllProductEventCopyWithImpl<$Res, _$GetAllProductsImpl>
+    implements _$$GetAllProductsImplCopyWith<$Res> {
+  __$$GetAllProductsImplCopyWithImpl(
+      _$GetAllProductsImpl _value, $Res Function(_$GetAllProductsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$GetAllPRoductsImpl implements _GetAllPRoducts {
-  const _$GetAllPRoductsImpl();
+class _$GetAllProductsImpl implements _GetAllProducts {
+  const _$GetAllProductsImpl();
 
   @override
   String toString() {
@@ -205,7 +221,7 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetAllPRoductsImpl);
+        (other.runtimeType == runtimeType && other is _$GetAllProductsImpl);
   }
 
   @override
@@ -216,6 +232,7 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getAllProducts,
+    required TResult Function(int idCategory) getAllProductsByCategory,
   }) {
     return getAllProducts();
   }
@@ -225,6 +242,7 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getAllProducts,
+    TResult? Function(int idCategory)? getAllProductsByCategory,
   }) {
     return getAllProducts?.call();
   }
@@ -234,6 +252,7 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getAllProducts,
+    TResult Function(int idCategory)? getAllProductsByCategory,
     required TResult orElse(),
   }) {
     if (getAllProducts != null) {
@@ -246,7 +265,9 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetAllPRoducts value) getAllProducts,
+    required TResult Function(_GetAllProducts value) getAllProducts,
+    required TResult Function(_GetAllProductsByCategory value)
+        getAllProductsByCategory,
   }) {
     return getAllProducts(this);
   }
@@ -255,7 +276,9 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetAllPRoducts value)? getAllProducts,
+    TResult? Function(_GetAllProducts value)? getAllProducts,
+    TResult? Function(_GetAllProductsByCategory value)?
+        getAllProductsByCategory,
   }) {
     return getAllProducts?.call(this);
   }
@@ -264,7 +287,8 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetAllPRoducts value)? getAllProducts,
+    TResult Function(_GetAllProducts value)? getAllProducts,
+    TResult Function(_GetAllProductsByCategory value)? getAllProductsByCategory,
     required TResult orElse(),
   }) {
     if (getAllProducts != null) {
@@ -274,8 +298,154 @@ class _$GetAllPRoductsImpl implements _GetAllPRoducts {
   }
 }
 
-abstract class _GetAllPRoducts implements AllProductEvent {
-  const factory _GetAllPRoducts() = _$GetAllPRoductsImpl;
+abstract class _GetAllProducts implements AllProductEvent {
+  const factory _GetAllProducts() = _$GetAllProductsImpl;
+}
+
+/// @nodoc
+abstract class _$$GetAllProductsByCategoryImplCopyWith<$Res> {
+  factory _$$GetAllProductsByCategoryImplCopyWith(
+          _$GetAllProductsByCategoryImpl value,
+          $Res Function(_$GetAllProductsByCategoryImpl) then) =
+      __$$GetAllProductsByCategoryImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int idCategory});
+}
+
+/// @nodoc
+class __$$GetAllProductsByCategoryImplCopyWithImpl<$Res>
+    extends _$AllProductEventCopyWithImpl<$Res, _$GetAllProductsByCategoryImpl>
+    implements _$$GetAllProductsByCategoryImplCopyWith<$Res> {
+  __$$GetAllProductsByCategoryImplCopyWithImpl(
+      _$GetAllProductsByCategoryImpl _value,
+      $Res Function(_$GetAllProductsByCategoryImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? idCategory = null,
+  }) {
+    return _then(_$GetAllProductsByCategoryImpl(
+      null == idCategory
+          ? _value.idCategory
+          : idCategory // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetAllProductsByCategoryImpl implements _GetAllProductsByCategory {
+  const _$GetAllProductsByCategoryImpl(this.idCategory);
+
+  @override
+  final int idCategory;
+
+  @override
+  String toString() {
+    return 'AllProductEvent.getAllProductsByCategory(idCategory: $idCategory)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetAllProductsByCategoryImpl &&
+            (identical(other.idCategory, idCategory) ||
+                other.idCategory == idCategory));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, idCategory);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetAllProductsByCategoryImplCopyWith<_$GetAllProductsByCategoryImpl>
+      get copyWith => __$$GetAllProductsByCategoryImplCopyWithImpl<
+          _$GetAllProductsByCategoryImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getAllProducts,
+    required TResult Function(int idCategory) getAllProductsByCategory,
+  }) {
+    return getAllProductsByCategory(idCategory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getAllProducts,
+    TResult? Function(int idCategory)? getAllProductsByCategory,
+  }) {
+    return getAllProductsByCategory?.call(idCategory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getAllProducts,
+    TResult Function(int idCategory)? getAllProductsByCategory,
+    required TResult orElse(),
+  }) {
+    if (getAllProductsByCategory != null) {
+      return getAllProductsByCategory(idCategory);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GetAllProducts value) getAllProducts,
+    required TResult Function(_GetAllProductsByCategory value)
+        getAllProductsByCategory,
+  }) {
+    return getAllProductsByCategory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GetAllProducts value)? getAllProducts,
+    TResult? Function(_GetAllProductsByCategory value)?
+        getAllProductsByCategory,
+  }) {
+    return getAllProductsByCategory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GetAllProducts value)? getAllProducts,
+    TResult Function(_GetAllProductsByCategory value)? getAllProductsByCategory,
+    required TResult orElse(),
+  }) {
+    if (getAllProductsByCategory != null) {
+      return getAllProductsByCategory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetAllProductsByCategory implements AllProductEvent {
+  const factory _GetAllProductsByCategory(final int idCategory) =
+      _$GetAllProductsByCategoryImpl;
+
+  int get idCategory;
+  @JsonKey(ignore: true)
+  _$$GetAllProductsByCategoryImplCopyWith<_$GetAllProductsByCategoryImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

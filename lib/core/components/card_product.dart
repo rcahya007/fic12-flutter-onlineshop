@@ -67,6 +67,31 @@ class CardProduct extends StatelessWidget {
                         ),
                       )
                     : const SizedBox(),
+                Positioned(
+                  right: 8,
+                  bottom: 8,
+                  child: Container(
+                    height: 36,
+                    width: 36,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: colorWhite,
+                      boxShadow: [
+                        BoxShadow(
+                          color: colorBlack.withOpacity(0.5),
+                          blurRadius: 5,
+                        )
+                      ],
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        Assets.icons.bag.path,
+                        height: 24,
+                        width: 24,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
