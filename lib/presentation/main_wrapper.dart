@@ -1,10 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
+import 'package:badges/badges.dart' as badges;
 
 class MainWrapper extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
@@ -69,21 +72,62 @@ class _MainWrapperState extends State<MainWrapper> {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                Assets.icons.bag.path,
-                colorFilter: ColorFilter.mode(
-                  _selectedIndex == 1 ? colorBlack : colorGiratina400,
-                  BlendMode.srcIn,
-                ),
-              ),
+              icon: BlocBuilder<CheckoutBloc, CheckoutState>(
+                  builder: (context, state) {
+                return state.maybeWhen(
+                  loaded: (products) {
+                    final totalQuantity = products.fold(
+                        0,
+                        (previousValue, element) =>
+                            previousValue + element.quantity);
+                    return totalQuantity > 0
+                        ? badges.Badge(
+                            position: badges.BadgePosition.topEnd(
+                              top: -10,
+                              end: -12,
+                            ),
+                            badgeStyle: const badges.BadgeStyle(
+                              borderSide: BorderSide(
+                                color: colorBlack,
+                                width: 1,
+                              ),
+                            ),
+                            badgeContent: Text(
+                              '$totalQuantity',
+                              style: body3reg.copyWith(
+                                  color: colorWhite, fontSize: 10),
+                            ),
+                            child: SvgPicture.asset(
+                              Assets.icons.bag.path,
+                              colorFilter: ColorFilter.mode(
+                                _selectedIndex == 1
+                                    ? colorBlack
+                                    : colorGiratina400,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          )
+                        : const SizedBox();
+                  },
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  error: (message) => Center(
+                    child: Text(message),
+                  ),
+                  orElse: () => const SizedBox(),
+                );
+              }),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(Assets.icons.heart.path,
-                  colorFilter: ColorFilter.mode(
-                    _selectedIndex == 2 ? colorBlack : colorGiratina400,
-                    BlendMode.srcIn,
-                  )),
+              icon: SvgPicture.asset(
+                Assets.icons.heart.path,
+                colorFilter: ColorFilter.mode(
+                  _selectedIndex == 2 ? colorBlack : colorGiratina400,
+                  BlendMode.srcIn,
+                ),
+              ),
               label: '',
             ),
             BottomNavigationBarItem(

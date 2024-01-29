@@ -6,6 +6,8 @@ import 'package:flutter_fic12_onlineshop/navigation/app_navigation.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_room/all_room_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/category/category_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/checkout/checkout_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/product_by_category/product_by_category_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +28,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AllProductBloc(ProductRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => ProductByCategoryBloc(ProductRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => CheckoutBloc(),
         ),
       ],
       child: MaterialApp.router(

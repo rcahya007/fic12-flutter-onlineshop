@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/core/components/grid_view_product.dart';
-import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/product_by_category/product_by_category_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,6 +29,7 @@ class _CatalogPageState extends State<CatalogPage> {
   void initState() {
     super.initState();
     _searchProductController = TextEditingController();
+    context.read<ProductByCategoryBloc>().add(ProductByCategoryEvent.getAllProductsByCategory(int.parse(widget.idCategory)));
   }
 
   @override
@@ -139,7 +140,7 @@ class _CatalogPageState extends State<CatalogPage> {
                 ],
               ),
             ),
-            BlocBuilder<AllProductBloc, AllProductState>(
+            BlocBuilder<ProductByCategoryBloc, ProductByCategoryState>(
               builder: (context, state) {
                 return state.maybeWhen(
                   loaded: (products) => GridViewProduct(products: products),

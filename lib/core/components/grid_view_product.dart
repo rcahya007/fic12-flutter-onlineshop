@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fic12_onlineshop/core/components/card_product.dart';
-import 'package:flutter_fic12_onlineshop/core/constants/variables.dart';
 import 'package:flutter_fic12_onlineshop/data/model/responses/product_response_model.dart';
 
 class GridViewProduct extends StatelessWidget {
@@ -25,14 +24,9 @@ class GridViewProduct extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         return CardProduct(
-          name: products[index].name ?? 'Product $index',
-          price: products[index].price ?? 0,
-          urlImage:
-              '${Variables.baseUrl}/storage/products/${products[index].image}',
           isNewProduct: index % 2 == 0,
           isLiked: index % 2 == 0,
-          description:
-              products[index].description ?? 'Lorem ipsum dolor sit amet',
+          product: products[index],
         );
       },
     );

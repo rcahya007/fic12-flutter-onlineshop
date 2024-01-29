@@ -21,13 +21,5 @@ class AllProductBloc extends Bloc<AllProductEvent, AllProductState> {
       );
     });
 
-    on<_GetAllProductsByCategory>((event, emit) async {
-      emit(const AllProductState.loading());
-      final response = await _productRemoteDatasource.getProductByCategory(event.idCategory);
-      response.fold(
-        (l) => emit(AllProductState.error(l)),
-        (r) => emit(AllProductState.loaded(r.data!.data!)),
-      );
-    });
   }
 }
