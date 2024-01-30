@@ -1,14 +1,25 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter_fic12_onlineshop/core/components/button_next_action.dart';
 import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 
-class UserPage extends StatelessWidget {
-  const UserPage({
+class EmptyPage extends StatelessWidget {
+  final String title;
+  final String descriptionPage;
+  final String detailPage;
+  final String textButton;
+  final String urlImage;
+  final VoidCallback onTap;
+  const EmptyPage({
     Key? key,
+    required this.title,
+    required this.descriptionPage,
+    required this.detailPage,
+    required this.textButton,
+    required this.urlImage,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -17,26 +28,11 @@ class UserPage extends StatelessWidget {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: const EdgeInsets.all(
-            16,
-          ),
+        const SizedBox(
           height: 56,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SvgPicture.asset(
-                Assets.icons.settings.path,
-                width: 24,
-                height: 24,
-                colorFilter:
-                    const ColorFilter.mode(colorBlack, BlendMode.srcIn),
-              ),
-            ],
-          ),
         ),
-        const TitleSection(
-          name: 'my account',
+        TitleSection(
+          name: title,
         ),
         Expanded(
           child: Padding(
@@ -45,13 +41,13 @@ class UserPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  Assets.images.smiley.path,
+                  urlImage,
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 Text(
-                  'come on in',
+                  descriptionPage,
                   style: heading2semi,
                 ),
                 const SizedBox(
@@ -59,25 +55,22 @@ class UserPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Center(
-                    child: Text(
-                      'view orders and update your details',
-                      style: body1reg.copyWith(
-                        color: colorGiratina500,
-                      ),
-                      textAlign: TextAlign.justify,
+                  child: Text(
+                    detailPage,
+                    style: body1reg.copyWith(
+                      color: colorGiratina500,
                     ),
+                    textAlign: TextAlign.justify,
                   ),
                 ),
               ],
             ),
           ),
         ),
-        ButtonNextAction(
-          textButton: 'Continue with phone',
-          onTap: () {},
-        ),
+        ButtonNextAction(textButton: textButton, onTap: onTap),
       ],
     ));
   }
 }
+
+

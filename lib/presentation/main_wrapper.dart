@@ -107,7 +107,15 @@ class _MainWrapperState extends State<MainWrapper> {
                               ),
                             ),
                           )
-                        : const SizedBox();
+                        : SvgPicture.asset(
+                            Assets.icons.bag.path,
+                            colorFilter: ColorFilter.mode(
+                              _selectedIndex == 1
+                                  ? colorBlack
+                                  : colorGiratina400,
+                              BlendMode.srcIn,
+                            ),
+                          );
                   },
                   loading: () => const Center(
                     child: CircularProgressIndicator(),
