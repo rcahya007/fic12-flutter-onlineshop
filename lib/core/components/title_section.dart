@@ -16,7 +16,7 @@ class TitleSection extends StatelessWidget {
       ),
       child: Text(
         name,
-        style: heading2semi,
+        style: heading1semi,
       ),
     );
   }

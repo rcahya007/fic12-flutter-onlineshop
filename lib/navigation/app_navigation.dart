@@ -5,6 +5,8 @@ import 'package:flutter_fic12_onlineshop/presentation/home/pages/categories_page
 import 'package:flutter_fic12_onlineshop/presentation/home/pages/home_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/liked/pages/liked_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/main_wrapper.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/pages/login_page.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/pages/register_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/user/pages/user_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -111,12 +113,23 @@ class AppNavigation {
             navigatorKey: _rootNavigatorUser,
             routes: [
               GoRoute(
-                path: '/user',
-                name: 'User',
-                builder: (context, state) => UserPage(
-                  key: state.pageKey,
-                ),
-              ),
+                  path: '/user',
+                  name: 'User',
+                  builder: (context, state) => UserPage(
+                        key: state.pageKey,
+                      ),
+                  routes: [
+                    GoRoute(
+                      path: 'register',
+                      name: 'register',
+                      builder: (context, state) => const RegisterPage(),
+                    ),
+                    GoRoute(
+                      path: 'login',
+                      name: 'login',
+                      builder: (context, state) => const LoginPage(),
+                    ),
+                  ]),
             ],
           ),
         ],

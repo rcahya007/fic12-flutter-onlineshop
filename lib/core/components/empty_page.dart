@@ -67,10 +67,13 @@ class EmptyPage extends StatelessWidget {
             ),
           ),
         ),
-        ButtonNextAction(textButton: textButton, onTap: onTap),
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: 16,
+          ),
+          child: ButtonNextAction(textButton: textButton, onTap: onTap),
+        ),
       ],
     ));
   }
 }
-
-

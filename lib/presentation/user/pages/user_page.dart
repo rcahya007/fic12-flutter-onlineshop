@@ -1,10 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/pages/login_page.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/pages/register_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter_fic12_onlineshop/core/components/button_next_action.dart';
 import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
+import 'package:go_router/go_router.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({
@@ -13,6 +16,9 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return const LoginPage();
+    // return const RegisterPage();
+
     return SafeArea(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,9 +79,14 @@ class UserPage extends StatelessWidget {
             ),
           ),
         ),
-        ButtonNextAction(
-          textButton: 'Continue with phone',
-          onTap: () {},
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: ButtonNextAction(
+            textButton: 'Continue with phone / email',
+            onTap: () {
+              context.goNamed('login');
+            },
+          ),
         ),
       ],
     ));

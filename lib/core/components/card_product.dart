@@ -8,6 +8,7 @@ import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 import 'package:flutter_fic12_onlineshop/data/model/responses/product_response_model.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/checkout/checkout_bloc.dart';
+import 'package:flutter_fic12_onlineshop/core/extensions/int_ext.dart';
 
 class CardProduct extends StatelessWidget {
   final Product product;
@@ -118,7 +119,7 @@ class CardProduct extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '\$${product.price.toString()}',
+                  product.price!.currencyFormatRp,
                   style: body1semi,
                 ),
               ),

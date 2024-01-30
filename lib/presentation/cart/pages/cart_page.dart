@@ -1,8 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
+import 'package:flutter_fic12_onlineshop/core/components/empty_page.dart';
+import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/cart_bag.dart';
+import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/promo_code.dart';
+
+import 'package:flutter_fic12_onlineshop/core/components/button_next_action.dart';
 import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
-import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/total_cart.dart';
+import 'package:flutter_fic12_onlineshop/presentation/home/bloc/checkout/checkout_bloc.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -10,134 +17,86 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 56,
-              ),
-              const TitleSection(name: 'bag'),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 16,
-                  right: 16,
-                ),
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 24),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 115,
-                          width: 94,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: colorGiratina500,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              'https://picsum.photos/200',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
+      body: BlocBuilder<CheckoutBloc, CheckoutState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            loaded: (products) {
+              final totalProdcut = products.length;
+              if (totalProdcut == 0) {
+                return EmptyPage(
+                  title: 'bag',
+                  descriptionPage: 'your bag is empty',
+                  detailPage:
+                      'items remain in your bag for 1 hour, and then they’re moved to your Saved items',
+                  textButton: 'Start Shopping',
+                  urlImage: Assets.images.surprised.path,
+                  onTap: () {},
+                );
+              } else {
+                return SafeArea(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      '\$150.00',
-                                      style: body1semi,
-                                    ),
+                              const SizedBox(
+                                height: 56,
+                              ),
+                              const TitleSection(name: 'bag'),
+                              BlocBuilder<CheckoutBloc, CheckoutState>(
+                                  builder: (context, state) {
+                                return state.maybeWhen(
+                                  loaded: (products) {
+                                    return CartBag(
+                                      products: products,
+                                    );
+                                  },
+                                  loading: () => const Center(
+                                    child: CircularProgressIndicator(),
                                   ),
-                                  SvgPicture.asset(
-                                    Assets.icons.clear.path,
-                                    height: 24,
-                                    width: 24,
-                                    colorFilter: const ColorFilter.mode(
-                                      colorGiratina500,
-                                      BlendMode.srcIn,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'Wooden bedside table featuring a raised design',
-                                style: body3reg.copyWith(
-                                  color: colorGiratina500,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 19,
-                              ),
-                              Container(
-                                width: 98,
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: colorGiratina100,
-                                ),
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      Assets.icons.minus.path,
-                                      width: 20,
-                                      height: 20,
-                                      colorFilter: const ColorFilter.mode(
-                                          colorBlack, BlendMode.srcIn),
-                                    ),
-                                    Expanded(
-                                      child: Center(
-                                        child: Text(
-                                          '8',
-                                          style: body2semi,
-                                        ),
-                                      ),
-                                    ),
-                                    SvgPicture.asset(
-                                      Assets.icons.plus.path,
-                                      width: 20,
-                                      height: 20,
-                                      colorFilter: const ColorFilter.mode(
-                                          colorBlack, BlendMode.srcIn),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  error: (message) => Center(
+                                    child: Text(message),
+                                  ),
+                                  orElse: () => const SizedBox(),
+                                );
+                              }),
+
+                              //Component Promocode
+                              const PromoCode(),
+
+                              // Total Cart
+                              const TotalCart(),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              Container(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  'promocode',
-                  style: heading2semi,
-                ),
-              ),
-            ],
-          ),
-        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                        ),
+                        child: ButtonNextAction(
+                          onTap: () {},
+                          textButton: 'Checkout',
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+            loading: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            error: (message) => Center(
+              child: Text(message),
+            ),
+            orElse: () => const SizedBox(),
+          );
+        },
       ),
 
       // If Empty Cart Bag
