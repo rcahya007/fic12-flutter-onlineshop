@@ -71,7 +71,12 @@ class EmptyPage extends StatelessWidget {
           padding: const EdgeInsets.only(
             bottom: 16,
           ),
-          child: ButtonNextAction(textButton: textButton, onTap: onTap),
+          child: ButtonNextAction(
+              widgetInside: Text(
+                textButton,
+                style: body1semi,
+              ),
+              onTap: onTap),
         ),
       ],
     ));

@@ -244,7 +244,13 @@ class _RegisterPageState extends State<RegisterPage> {
               padding: const EdgeInsets.only(
                 bottom: 16,
               ),
-              child: ButtonNextAction(onTap: () {}, textButton: 'Register'),
+              child: ButtonNextAction(
+                onTap: () {},
+                widgetInside: Text(
+                  'Register',
+                  style: body1semi,
+                ),
+              ),
             )
           ],
         ),

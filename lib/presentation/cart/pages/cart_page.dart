@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/components/empty_page.dart';
+import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
+import 'package:flutter_fic12_onlineshop/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/cart_bag.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/promo_code.dart';
 
@@ -10,6 +12,7 @@ import 'package:flutter_fic12_onlineshop/core/components/button_next_action.dart
 import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/total_cart.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/checkout/checkout_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -22,6 +25,8 @@ class CartPage extends StatelessWidget {
           return state.maybeWhen(
             loaded: (products) {
               final totalProdcut = products.length;
+              final totalQuantity = products.fold(0,
+                  (previousValue, element) => previousValue + element.quantity);
               if (totalProdcut == 0) {
                 return EmptyPage(
                   title: 'bag',
@@ -45,24 +50,7 @@ class CartPage extends StatelessWidget {
                                 height: 56,
                               ),
                               const TitleSection(name: 'bag'),
-                              BlocBuilder<CheckoutBloc, CheckoutState>(
-                                  builder: (context, state) {
-                                return state.maybeWhen(
-                                  loaded: (products) {
-                                    return CartBag(
-                                      products: products,
-                                    );
-                                  },
-                                  loading: () => const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  error: (message) => Center(
-                                    child: Text(message),
-                                  ),
-                                  orElse: () => const SizedBox(),
-                                );
-                              }),
-
+                              CartBag(products: products),
                               //Component Promocode
                               const PromoCode(),
 
@@ -77,8 +65,22 @@ class CartPage extends StatelessWidget {
                           vertical: 16,
                         ),
                         child: ButtonNextAction(
-                          onTap: () {},
-                          textButton: 'Checkout',
+                          onTap: () async {
+                            final isAuth = await AuthLocalDatasource().isAuth();
+                            if (!isAuth) {
+                              if (context.mounted) {
+                                context.goNamed('login');
+                              }
+                            } else {
+                              if (context.mounted) {
+                                context.goNamed('checkout-1');
+                              }
+                            }
+                          },
+                          widgetInside: Text(
+                            'Checkout ($totalQuantity)',
+                            style: body1semi,
+                          ),
                         ),
                       ),
                     ],

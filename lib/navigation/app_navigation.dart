@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/pages/cart_page.dart';
+import 'package:flutter_fic12_onlineshop/presentation/cart/pages/checkout_1_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/pages/catalog_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/pages/categories_page.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/pages/home_page.dart';
@@ -90,6 +91,15 @@ class AppNavigation {
                 builder: (context, state) => CartPage(
                   key: state.pageKey,
                 ),
+                routes: [
+                  GoRoute(
+                    path: 'checkout-1',
+                    name: 'checkout-1',
+                    builder: (context, state) => Checkout1Page(
+                      key: state.pageKey,
+                    ),
+                  )
+                ],
               ),
             ],
           ),

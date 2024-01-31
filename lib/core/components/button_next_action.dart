@@ -1,13 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 
 class ButtonNextAction extends StatelessWidget {
-  final String textButton;
+  final Widget widgetInside;
   final VoidCallback onTap;
   const ButtonNextAction({
     Key? key,
+    required this.widgetInside,
     required this.onTap,
-    required this.textButton,
   }) : super(key: key);
 
   @override
@@ -23,10 +25,7 @@ class ButtonNextAction extends StatelessWidget {
           color: colorCharizard400,
         ),
         child: Center(
-          child: Text(
-            textButton,
-            style: body1semi,
-          ),
+          child: widgetInside,
         ),
       ),
     );

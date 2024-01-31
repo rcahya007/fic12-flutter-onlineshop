@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/components/button_next_action.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
+import 'package:flutter_fic12_onlineshop/data/datasources/auth_local_datasource.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/bloc/login/login_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,7 +22,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -180,11 +182,55 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                bottom: 16,
-              ),
-              child: ButtonNextAction(onTap: () {}, textButton: 'Login'),
+            BlocConsumer<LoginBloc, LoginState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                    orElse: () {},
+                    loaded: (auth) {
+                      AuthLocalDatasource().saveAuthData(auth);
+                      context.goNamed('User');
+                      context.goNamed('home');
+                    },
+                    error: (message) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(message),
+                        ),
+                      );
+                    });
+              },
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 16,
+                    ),
+                    child: ButtonNextAction(
+                      onTap: () {
+                        context.read<LoginBloc>().add(
+                              LoginEvent.login(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              ),
+                            );
+                      },
+                      widgetInside: Text(
+                        'Login',
+                        style: body1semi,
+                      ),
+                    ),
+                  ),
+                  loading: () => Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 16,
+                    ),
+                    child: ButtonNextAction(
+                      onTap: () {},
+                      widgetInside: const CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              },
             )
           ],
         ),
