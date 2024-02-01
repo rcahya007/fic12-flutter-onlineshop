@@ -5,5 +5,5 @@ extension IntegerExt on int {
         locale: 'id',
         symbol: 'IDR ',
         decimalDigits: 0,
-      ).format(this);
+      ).  format(this);
 }

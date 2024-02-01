@@ -4,6 +4,7 @@ import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/components/button_next_action.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/auth_local_datasource.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/bloc/check_auth/check_auth_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/user/bloc/login/login_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -188,8 +189,10 @@ class _LoginPageState extends State<LoginPage> {
                     orElse: () {},
                     loaded: (auth) {
                       AuthLocalDatasource().saveAuthData(auth);
-                      context.goNamed('User');
-                      context.goNamed('home');
+                      context.goNamed('user');
+                      context
+                          .read<CheckAuthBloc>()
+                          .add(const CheckAuthEvent.check());
                     },
                     error: (message) {
                       ScaffoldMessenger.of(context).showSnackBar(

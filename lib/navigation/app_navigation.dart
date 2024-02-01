@@ -13,7 +13,6 @@ import 'package:go_router/go_router.dart';
 
 class AppNavigation {
   AppNavigation._();
-
   static String init = '/home';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -63,17 +62,17 @@ class AppNavigation {
                     },
                     routes: [
                       GoRoute(
-                          path: ':nameCategory',
-                          name: 'catalog',
-                          builder: (context, state) {
-                            return CatalogPage(
-                              key: state.pageKey,
-                              idCategory:
-                                  state.uri.queryParameters['idCategory']!,
-                              nameCategory:
-                                  state.pathParameters['nameCategory']!,
-                            );
-                          }),
+                        path: ':nameCategory',
+                        name: 'catalog',
+                        builder: (context, state) {
+                          return CatalogPage(
+                            key: state.pageKey,
+                            idCategory:
+                                state.uri.queryParameters['idCategory']!,
+                            nameCategory: state.pathParameters['nameCategory']!,
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ],
@@ -87,7 +86,7 @@ class AppNavigation {
             routes: [
               GoRoute(
                 path: '/cart',
-                name: 'Cart',
+                name: 'cart',
                 builder: (context, state) => CartPage(
                   key: state.pageKey,
                 ),
@@ -110,7 +109,7 @@ class AppNavigation {
             routes: [
               GoRoute(
                 path: '/liked',
-                name: 'Liked',
+                name: 'liked',
                 builder: (context, state) => LikedPage(
                   key: state.pageKey,
                 ),
@@ -123,23 +122,24 @@ class AppNavigation {
             navigatorKey: _rootNavigatorUser,
             routes: [
               GoRoute(
-                  path: '/user',
-                  name: 'User',
-                  builder: (context, state) => UserPage(
-                        key: state.pageKey,
-                      ),
-                  routes: [
-                    GoRoute(
-                      path: 'register',
-                      name: 'register',
-                      builder: (context, state) => const RegisterPage(),
-                    ),
-                    GoRoute(
-                      path: 'login',
-                      name: 'login',
-                      builder: (context, state) => const LoginPage(),
-                    ),
-                  ]),
+                path: '/user',
+                name: 'user',
+                builder: (context, state) => UserPage(
+                  key: state.pageKey,
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'register',
+                    name: 'register',
+                    builder: (context, state) => const RegisterPage(),
+                  ),
+                  GoRoute(
+                    path: 'login',
+                    name: 'login',
+                    builder: (context, state) => const LoginPage(),
+                  ),
+                ],
+              ),
             ],
           ),
         ],

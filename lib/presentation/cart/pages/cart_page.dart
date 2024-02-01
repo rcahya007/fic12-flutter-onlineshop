@@ -5,6 +5,7 @@ import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/components/empty_page.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/auth_local_datasource.dart';
+import 'package:flutter_fic12_onlineshop/presentation/bloc/change_index_menu/change_index_menu_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/cart_bag.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/promo_code.dart';
 
@@ -35,7 +36,12 @@ class CartPage extends StatelessWidget {
                       'items remain in your bag for 1 hour, and then they’re moved to your Saved items',
                   textButton: 'Start Shopping',
                   urlImage: Assets.images.surprised.path,
-                  onTap: () {},
+                  onTap: () {
+                    context
+                        .read<ChangeIndexMenuBloc>()
+                        .add(const ChangeIndexMenuEvent.changeIndexMenu(0));
+                    context.goNamed('home');
+                  },
                 );
               } else {
                 return SafeArea(

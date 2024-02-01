@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/bloc/check_auth/check_auth_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/user/bloc/logout/logout_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -70,7 +71,10 @@ class AccountPage extends StatelessWidget {
                       state.maybeWhen(
                           orElse: () {},
                           loaded: () {
-                            context.goNamed('home');
+                            context.goNamed('user');
+                            context
+                                .read<CheckAuthBloc>()
+                                .add(const CheckAuthEvent.check());
                           },
                           error: (message) {
                             ScaffoldMessenger.of(context).showSnackBar(

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic12_onlineshop/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/auth_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/home_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/navigation/app_navigation.dart';
+import 'package:flutter_fic12_onlineshop/presentation/bloc/change_index_menu/change_index_menu_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_room/all_room_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/category/category_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/product_by_category/product_by_category_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/bloc/check_auth/check_auth_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/user/bloc/login/login_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/user/bloc/logout/logout_bloc.dart';
 
@@ -43,6 +46,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LogoutBloc(AuthRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => CheckAuthBloc(AuthLocalDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => ChangeIndexMenuBloc(),
         ),
       ],
       child: MaterialApp.router(
