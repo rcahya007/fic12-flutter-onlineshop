@@ -63,7 +63,7 @@ class CartBag extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'Wooden table',
+                            products[index].product.name!,
                             style: body1semi,
                           ),
                         ),
