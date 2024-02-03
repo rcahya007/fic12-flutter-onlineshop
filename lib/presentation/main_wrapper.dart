@@ -3,6 +3,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/bloc/change_index_menu/change_index_menu_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/user/bloc/check_auth/check_auth_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,6 +28,7 @@ class _MainWrapperState extends State<MainWrapper> {
     context
         .read<ChangeIndexMenuBloc>()
         .add(const ChangeIndexMenuEvent.changeIndexMenu(0));
+    context.read<CheckAuthBloc>().add(const CheckAuthEvent.check());
     super.initState();
   }
 

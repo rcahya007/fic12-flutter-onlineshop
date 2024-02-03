@@ -10,7 +10,7 @@ class InputFormCustom extends StatefulWidget {
     required this.controller,
     required this.isPassword,
     this.keyboardType,
-    this.obscureText,
+    this.obscureText = false,
     this.validator,
     this.title,
   }) : super(key: key);
@@ -27,7 +27,6 @@ class InputFormCustom extends StatefulWidget {
 }
 
 class _InputFormCustomState extends State<InputFormCustom> {
-
   @override
   void dispose() {
     widget.controller.dispose();
