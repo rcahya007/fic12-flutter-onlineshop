@@ -40,13 +40,17 @@ class CardProduct extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    '${Variables.baseUrl}/storage/products/${product.image}',
-                    fit: BoxFit.cover,
-                    height: double.infinity,
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                  ),
+                  child: product.image != null
+                      ? Image.network(
+                          '${Variables.baseUrl}/storage/products/${product.image}',
+                          fit: BoxFit.cover,
+                          height: double.infinity,
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                        )
+                      : Container(
+                          color: colorGiratina400,
+                        ),
                 ),
                 isNewProduct
                     ? Positioned(

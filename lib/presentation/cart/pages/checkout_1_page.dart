@@ -56,7 +56,7 @@ class _Checkout1PageState extends State<Checkout1Page> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                context.pop();
+                                GoRouter.of(context).pop();
                               },
                               child: SvgPicture.asset(
                                 Assets.icons.arrowLeft.path,
@@ -157,7 +157,7 @@ class _Checkout1PageState extends State<Checkout1Page> {
                 child: ButtonNextAction(
                   onTap: () {
                     if (_checkout1.currentState!.validate()) {
-                      context.goNamed('checkout-2');
+                      context.push(context.namedLocation('checkout-2'));
                     }
                   },
                   widgetInside: Text(

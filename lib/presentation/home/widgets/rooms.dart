@@ -70,13 +70,17 @@ class Rooms extends StatelessWidget {
                         8,
                       ),
                     ),
-                    child: Image.network(
-                      '${Variables.baseUrl}/storage/rooms/${rooms[index].image}',
-                      fit: BoxFit.cover,
-                      height: double.infinity,
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                    ),
+                    child: rooms[index].image != null
+                        ? Image.network(
+                            '${Variables.baseUrl}/storage/rooms/${rooms[index].image}',
+                            fit: BoxFit.cover,
+                            height: double.infinity,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                          )
+                        : Container(
+                            color: colorGiratina400,
+                          ),
                   ),
                 ),
               ],

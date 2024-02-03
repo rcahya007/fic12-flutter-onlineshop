@@ -46,10 +46,14 @@ class CartBag extends StatelessWidget {
                     ]),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    '${Variables.baseUrl}/storage/products/${products[index].product.image}',
-                    fit: BoxFit.fill,
-                  ),
+                  child: products[index].product.image != null
+                      ? Image.network(
+                          '${Variables.baseUrl}/storage/products/${products[index].product.image}',
+                          fit: BoxFit.fill,
+                        )
+                      : Container(
+                          color: colorGiratina400,
+                        ),
                 ),
               ),
               const SizedBox(

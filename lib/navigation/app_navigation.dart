@@ -91,22 +91,6 @@ class AppNavigation {
                 builder: (context, state) => CartPage(
                   key: state.pageKey,
                 ),
-                routes: [
-                  GoRoute(
-                    path: 'checkout-1',
-                    name: 'checkout-1',
-                    builder: (context, state) => Checkout1Page(
-                      key: state.pageKey,
-                    ),
-                    routes: [
-                      GoRoute(
-                        path: 'checkout-2',
-                        name: 'checkout-2',
-                        builder: (context, state) => const Checkout2Page(),
-                      ),
-                    ]
-                  )
-                ],
               ),
             ],
           ),
@@ -149,6 +133,23 @@ class AppNavigation {
                 ],
               ),
             ],
+          ),
+        ],
+      ),
+
+      /// Checkout Route
+      GoRoute(
+        path: '/checkout-1',
+        name: 'checkout-1',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => Checkout1Page(
+          key: state.pageKey,
+        ),
+        routes: [
+          GoRoute(
+            path: 'checkout-2',
+            name: 'checkout-2',
+            builder: (context, state) => const Checkout2Page(),
           ),
         ],
       ),

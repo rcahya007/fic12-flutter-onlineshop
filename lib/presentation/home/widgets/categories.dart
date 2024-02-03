@@ -43,12 +43,16 @@ class Categories extends StatelessWidget {
             child: Row(
               children: [
                 ClipOval(
-                  child: Image.network(
-                    '${Variables.baseUrl}/storage/category/${categories[index].image}',
-                    width: 36,
-                    height: 36,
-                    fit: BoxFit.cover,
-                  ),
+                  child: categories[index].image != null
+                      ? Image.network(
+                          '${Variables.baseUrl}/storage/category/${categories[index].image}',
+                          width: 36,
+                          height: 36,
+                          fit: BoxFit.cover,
+                        )
+                      : Container(
+                          color: colorGiratina400,
+                        ),
                 ),
                 const SizedBox(
                   width: 16,

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic12_onlineshop/data/datasources/address_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/auth_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/home_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_fic12_onlineshop/navigation/app_navigation.dart';
 import 'package:flutter_fic12_onlineshop/presentation/bloc/change_index_menu/change_index_menu_bloc.dart';
+import 'package:flutter_fic12_onlineshop/presentation/cart/bloc/address/address_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/all_room/all_room_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/home/bloc/category/category_bloc.dart';
@@ -53,6 +55,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ChangeIndexMenuBloc(),
         ),
+        BlocProvider(
+          create: (context) => AddressBloc(AddressRemoteDatasource()),
+        )
       ],
       child: MaterialApp.router(
         routerConfig: AppNavigation.router,

@@ -79,7 +79,8 @@ class CartPage extends StatelessWidget {
                               }
                             } else {
                               if (context.mounted) {
-                                context.goNamed('checkout-1');
+                                context
+                                    .push(context.namedLocation('checkout-1'));
                               }
                             }
                           },
