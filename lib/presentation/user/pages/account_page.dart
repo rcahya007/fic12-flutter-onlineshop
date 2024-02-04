@@ -57,10 +57,16 @@ class AccountPage extends StatelessWidget {
                   UserSectionMenu(
                     urlAssetIcon: Assets.icons.user.path,
                     title: 'My Details',
+                    onTap: () {
+                      context.goNamed('my_details');
+                    },
                   ),
                   UserSectionMenu(
                     urlAssetIcon: Assets.icons.pin.path,
                     title: 'Address book',
+                    onTap: (){
+                      context.goNamed('address_book');
+                    },
                   ),
                   UserSectionMenu(
                     urlAssetIcon: Assets.icons.card.path,

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/bloc/address/address_bloc.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/card_delivery_address.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,7 +10,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/components/button_next_action.dart';
 import 'package:flutter_fic12_onlineshop/core/components/sub_title_section.dart';
-import 'package:flutter_fic12_onlineshop/core/components/title_section.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
 import 'package:flutter_fic12_onlineshop/presentation/cart/widgets/delivery_methode.dart';
 
@@ -100,86 +100,83 @@ class _Checkout2PageState extends State<Checkout2Page> {
                     BlocBuilder<AddressBloc, AddressState>(
                       builder: (context, state) {
                         return state.maybeWhen(
-                            orElse: () => const SizedBox(),
-                            error: (message) => const Center(
-                                  child: Text('error'),
-                                ),
-                            loading: () {
+                          orElse: () => const SizedBox(),
+                          error: (message) => const Center(
+                            child: Text('error'),
+                          ),
+                          loading: () {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                          loaded: (address) {
+                            if (address.isEmpty) {
                               return const Center(
-                                child: CircularProgressIndicator(),
+                                child: Text(
+                                    'No address found, please add your address first'),
                               );
-                            },
-                            loaded: (address) {
-                              if (address.isEmpty) {
-                                return const Center(
-                                  child: Text(
-                                      'No address found, please add your address first'),
-                                );
-                              } else {
-                                final addressDefault = address.firstWhere(
-                                    (element) => element.isDefault == 1);
-                                return DeliveryAddress(address: addressDefault);
-                              }
-                            });
-                        // return GestureDetector(
-                        //   onTap: () {
-                        //     showModalBottomSheet(
-                        //       backgroundColor: colorWhite,
-                        //       context: context,
-                        //       builder: (context) {
-                        //         return SingleChildScrollView(
-                        //           child: Column(
-                        //             crossAxisAlignment:
-                        //                 CrossAxisAlignment.start,
-                        //             mainAxisSize: MainAxisSize.min,
-                        //             children: <Widget>[
-                        //               const SizedBox(
-                        //                 height: 56,
-                        //               ),
-                        //               const TitleSection(
-                        //                   name: 'delivery address'),
-                        //               ListView.builder(
-                        //                 physics:
-                        //                     const NeverScrollableScrollPhysics(),
-                        //                 shrinkWrap: true,
-                        //                 itemCount: 2,
-                        //                 itemBuilder: (context, index) {
-                        //                   return DeliveryAddress(
-                        //                     titleStreet: 'Street $index',
-                        //                     detailsStreet:
-                        //                         'Detail Street $index',
-                        //                   );
-                        //                 },
-                        //               ),
-                        //               const SizedBox(
-                        //                 height: 16,
-                        //               ),
-                        //               Padding(
-                        //                 padding: const EdgeInsets.only(
-                        //                   bottom: 16,
-                        //                 ),
-                        //                 child: ButtonNextAction(
-                        //                   onTap: () {
-                        //                     context.pop();
-                        //                   },
-                        //                   color: colorGiratina500,
-                        //                   widgetInside: Text(
-                        //                     'Cancel',
-                        //                     style: body1semi,
-                        //                   ),
-                        //                 ),
-                        //               )
-                        //             ],
-                        //           ),
-                        //         );
-                        //       },
-                        //     );
-                        //   },
-                        //   child: const DeliveryAddress(
-                        //     titleStreet: 'London, 221B Baker Street',
-                        //     detailsStreet: 'Hanna Gouse, +7 932 123-43-23',
-                        //   ),
-                        // );
+                            } else {
+                              final addressDefault = address.firstWhere(
+                                  (element) => element.isDefault == 1);
+                              return GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    backgroundColor: colorWhite,
+                                    context: context,
+                                    builder: (context) {
+                                      return SingleChildScrollView(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            const SizedBox(
+                                              height: 56,
+                                            ),
+                                            const TitleSection(
+                                                name: 'delivery address'),
+                                            ListView.builder(
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              itemCount: address.length,
+                                              itemBuilder: (context, index) {
+                                                return DeliveryAddress(
+                                                  address: address[index],
+                                                );
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              height: 16,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                bottom: 16,
+                                              ),
+                                              child: ButtonNextAction(
+                                                onTap: () {
+                                                  context.pop();
+                                                },
+                                                color: colorGiratina300,
+                                                widgetInside: Text(
+                                                  'Cancel',
+                                                  style: body1semi,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: DeliveryAddress(
+                                  address: addressDefault,
+                                ),
+                              );
+                            }
+                          },
+                        );
                       },
                     ),
                   ],

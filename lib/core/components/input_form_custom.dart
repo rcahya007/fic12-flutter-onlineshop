@@ -1,7 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:flutter_fic12_onlineshop/core/assets/assets.gen.dart';
 import 'package:flutter_fic12_onlineshop/core/constants/styles.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 // ignore: must_be_immutable
 class InputFormCustom extends StatefulWidget {
@@ -9,10 +11,12 @@ class InputFormCustom extends StatefulWidget {
     Key? key,
     required this.controller,
     required this.isPassword,
-    this.keyboardType,
-    this.obscureText = false,
     this.validator,
     this.title,
+    this.keyboardType,
+    this.onTap,
+    this.readOnly = false,
+    this.obscureText = false,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -21,6 +25,8 @@ class InputFormCustom extends StatefulWidget {
   final String? Function(String?)? validator;
   final String? title;
   final TextInputType? keyboardType;
+  bool? readOnly;
+  Function()? onTap;
 
   @override
   State<InputFormCustom> createState() => _InputFormCustomState();
@@ -41,6 +47,8 @@ class _InputFormCustomState extends State<InputFormCustom> {
       controller: widget.controller,
       obscureText: widget.obscureText!,
       style: body1reg,
+      readOnly: widget.readOnly!,
+      onTap: widget.onTap,
       decoration: InputDecoration(
         labelText: widget.title,
         labelStyle: body1reg.copyWith(
